@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { TextInput, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
 
 // Define the type for a single diet item
 interface DietItem {
@@ -29,7 +31,7 @@ const Diet: React.FC = () => {
 
   const fetchDiets = async () => {
     try {
-      const response = await axios.get<DietResponse>(`https://api.spoonacular.com/recipes/complexSearch`, {
+      const response = await axios.get<DietResponse>('https://api.spoonacular.com/recipes/complexSearch', {
         params: {
           apiKey: 'bceeb025d5534b488f8b2ed3c00a95a6', 
           query: searchQuery,
@@ -47,13 +49,13 @@ const Diet: React.FC = () => {
   const renderDietCard = ({ item }: { item: DietItem }) => (
     <TouchableOpacity style={styles.card}>
       <Image source={{ uri: item.image }} style={styles.image} />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>Protein: {item.nutrition.protein}g</Text>
-          <Text style={styles.infoText}>Calories: {item.nutrition.calories}</Text>
-        </View>
-      </View>
+      <ThemedView style={styles.textContainer}>
+        <ThemedText style={styles.title}>{item.title}</ThemedText>
+        <ThemedView style={styles.infoContainer}>
+          <ThemedText style={styles.infoText}>Protein: {item.nutrition.protein}g</ThemedText>
+          <ThemedText style={styles.infoText}>Calories: {item.nutrition.calories}</ThemedText>
+        </ThemedView>
+      </ThemedView>
     </TouchableOpacity>
   );
 
@@ -63,7 +65,7 @@ const Diet: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Search diets..."
@@ -80,15 +82,16 @@ const Diet: React.FC = () => {
           renderItem={renderDietCard}
         />
       )}
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
+    marginTop: 10,
     backgroundColor: '#fff',
+    marginBottom: 30,
   },
   input: {
     height: 40,
@@ -100,8 +103,8 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: 'row',
-    backgroundColor: '#f9f9f9',
-    padding: 15,
+    backgroundColor: '#fff',
+    padding: 10,
     marginBottom: 10,
     borderRadius: 10,
     elevation: 3,
