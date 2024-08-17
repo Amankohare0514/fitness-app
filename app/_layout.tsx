@@ -27,10 +27,21 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(routes)/welcome-intro/index" />
+        <Stack.Screen name="(routes)/login/index" />
+        <Stack.Screen name="(routes)/sign-up/index" />
+        <Stack.Screen name="(routes)/forgot-password/index" />
+        <Stack.Screen
+          name="(routes)/profile-details/index"
+          options={{
+            headerShown: true,
+            title: "Profile Details",
+            headerBackTitle: "Back",
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
