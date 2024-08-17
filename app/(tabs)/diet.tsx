@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { TextInput, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { TextInput, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
+import { useRouter } from 'expo-router';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Define the type for a single diet item
 interface DietItem {
@@ -24,6 +26,7 @@ const Diet: React.FC = () => {
   const [diets, setDiets] = useState<DietItem[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchDiets();
@@ -31,9 +34,9 @@ const Diet: React.FC = () => {
 
   const fetchDiets = async () => {
     try {
-      const response = await axios.get<DietResponse>('https://api.spoonacular.com/recipes/complexSearch', {
+      const response = await axios.get<DietResponse>(`https://api.spoonacular.com/recipes/complexSearch`, {
         params: {
-          apiKey: 'bceeb025d5534b488f8b2ed3c00a95a6', 
+          apiKey: 'bceeb025d5534b488f8b2ed3c00a95a6',
           query: searchQuery,
           addRecipeNutrition: true,
         },
@@ -47,7 +50,7 @@ const Diet: React.FC = () => {
   };
 
   const renderDietCard = ({ item }: { item: DietItem }) => (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => router.push(`/diet/${item.id}`)}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <ThemedView style={styles.textContainer}>
         <ThemedText style={styles.title}>{item.title}</ThemedText>
@@ -65,6 +68,7 @@ const Diet: React.FC = () => {
   };
 
   return (
+    <SafeAreaView>
     <ThemedView style={styles.container}>
       <TextInput
         style={styles.input}
@@ -79,17 +83,18 @@ const Diet: React.FC = () => {
         <FlatList
           data={diets}
           keyExtractor={(item) => item.id.toString()}
+          numColumns={2} // Render items in two columns
           renderItem={renderDietCard}
         />
       )}
     </ThemedView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    marginTop: 10,
     backgroundColor: '#fff',
     marginBottom: 30,
   },
@@ -102,10 +107,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   card: {
-    flexDirection: 'row',
+    flex: 1,
     backgroundColor: '#fff',
     padding: 10,
-    marginBottom: 10,
+    margin: 5,
     borderRadius: 10,
     elevation: 3,
     shadowColor: '#000',
@@ -114,17 +119,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   image: {
-    width: 80,
-    height: 80,
+    width: '100%',
+    height: 100,
     borderRadius: 10,
-    marginRight: 15,
+    marginBottom: 10,
   },
   textContainer: {
-    flex: 1,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 5,

@@ -2,19 +2,18 @@ import Loader from "@/components/ui/loader";
 import useUser from "@/hooks/auth/useUser";
 import {
   AntDesign,
-  FontAwesome,
   Ionicons,
-  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, ScrollView, Image, TouchableOpacity, RefreshControl } from "react-native";
-
+import {ScrollView, Image, TouchableOpacity, RefreshControl } from "react-native";
 import { useCallback, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { router } from "expo-router";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 
 export default function ProfileScreen() {
   const { user, loading, setRefetch,refetch } = useUser();
@@ -84,7 +83,7 @@ export default function ProfileScreen() {
         <Loader />
       ) : (
         <LinearGradient
-          colors={["#E5ECF9", "#F6F7F9"]}
+          colors={["#fff", "#fff"]}
           style={{ flex: 1, paddingTop: 80 }}
         >
           <ScrollView
@@ -92,8 +91,8 @@ export default function ProfileScreen() {
               <RefreshControl refreshing={refetch} onRefresh={onRefresh} />
             }
           >
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
-              <View style={{ position: "relative" }}>
+            <ThemedView style={{ flexDirection: "row", justifyContent: "center" }}>
+              <ThemedView style={{ position: "relative" }}>
                 <Image
                   source={{
                     uri:
@@ -120,9 +119,9 @@ export default function ProfileScreen() {
                 >
                   <Ionicons name="camera-outline" size={25} />
                 </TouchableOpacity>
-              </View>
-            </View>
-            <Text
+              </ThemedView>
+            </ThemedView>
+            <ThemedText
               style={{
                 textAlign: "center",
                 fontSize: 25,
@@ -130,17 +129,17 @@ export default function ProfileScreen() {
                 fontWeight: "600",
               }}
             >
-              {user?.name}
-            </Text>
-            <View style={{ marginHorizontal: 16, marginTop: 30 }}>
-              <Text
+             Hello, {user?.name}
+            </ThemedText>
+            <ThemedView style={{ marginHorizontal: 16, marginTop: 30 }}>
+              <ThemedText
                 style={{
                   fontSize: 20,
                   marginBottom: 16,
                 }}
               >
                 Account Details
-              </Text>
+              </ThemedText>
 
               <TouchableOpacity
                 style={{
@@ -151,14 +150,14 @@ export default function ProfileScreen() {
                 }}
                 onPress={() => logoutHandler()}
               >
-                <View
+                <ThemedView
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
                     columnGap: 30,
                   }}
                 >
-                  <View
+                  <ThemedView
                     style={{
                       borderWidth: 2,
                       borderColor: "#dde2ec",
@@ -174,16 +173,16 @@ export default function ProfileScreen() {
                       size={20}
                       color={"black"}
                     />
-                  </View>
+                  </ThemedView>
                   <TouchableOpacity onPress={() => logoutHandler()}>
-                    <Text style={{ fontSize: 16 }}>Log Out</Text>
+                    <ThemedText style={{ fontSize: 16 }}>Log Out</ThemedText>
                   </TouchableOpacity>
-                </View>
+                </ThemedView>
                 <TouchableOpacity>
                   <AntDesign name="right" size={26} color={"#CBD5E0"} />
                 </TouchableOpacity>
               </TouchableOpacity>
-            </View>
+            </ThemedView>
           </ScrollView>
         </LinearGradient>
       )}

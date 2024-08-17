@@ -4,11 +4,10 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { ThemedView } from '../ThemedView';
 import { ThemedText } from '../ThemedText';
 import useUser from '@/hooks/auth/useUser';
-import {RefreshControl} from "react-native"
 
 const ProfileData = () => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const {user} = useUser()
+  const { user } = useUser()
   const displayName = user?.name || 'Update your name';
 
   const toggleModal = () => {
@@ -32,8 +31,7 @@ const ProfileData = () => {
       {/* Greeting section */}
       <ThemedView style={styles.greetingContainer}>
         <ThemedText style={styles.greetingText}>
-          Hi, {displayName}  
-          <MaterialIcons name="waving-hand" size={34} color="orange" style={styles.waveIcon} />
+          Hi, {displayName} <MaterialIcons name="waving-hand" size={32} color="orange"  style={styles.waveicon} />
         </ThemedText>
       </ThemedView>
 
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     lineHeight: 50,
   },
-  waveIcon: {
+  waveicon: {
     marginLeft: 10,
     transform: [{ scaleX: -1 }],
   },
@@ -101,11 +99,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: '#ccc',
-    borderWidth: 0.2,
-    borderRadius: 6,
-    backgroundColor: '#f9f9f9',
+    borderWidth: 0.4,
+    borderRadius: 20,
+    backgroundColor: '#fff',
     paddingHorizontal: 10,
-    paddingVertical: 8, 
+    paddingVertical: 8,
   },
   searchIcon: {
     marginRight: 8,
