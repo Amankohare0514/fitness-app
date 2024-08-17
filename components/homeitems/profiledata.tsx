@@ -3,17 +3,13 @@ import { StyleSheet, Image, TextInput, Modal, View, TouchableOpacity } from 'rea
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { ThemedView } from '../ThemedView';
 import { ThemedText } from '../ThemedText';
+import useUser from '@/hooks/auth/useUser';
+import {RefreshControl} from "react-native"
 
-interface ProfileDataProps {
-  user?: {
-    name: string;
-    profileImg?: string;
-  };
-}
-
-const ProfileData: React.FC<ProfileDataProps> = ({ user }) => {
+const ProfileData = () => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const displayName = user?.name || 'Aman';
+  const {user} = useUser()
+  const displayName = user?.name || 'Update your name';
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -26,8 +22,8 @@ const ProfileData: React.FC<ProfileDataProps> = ({ user }) => {
         <TouchableOpacity onPress={toggleModal}>
           <Ionicons name="menu" size={30} color="#333" />
         </TouchableOpacity>
-        {user?.profileImg ? (
-          <Image source={{ uri: user.profileImg }} style={styles.profileImage} />
+        {user?.avatar?.url ? (
+          <Image source={{ uri: user?.avatar?.url }} style={styles.profileImage} />
         ) : (
           <MaterialIcons name="account-circle" size={30} color="#333" />
         )}

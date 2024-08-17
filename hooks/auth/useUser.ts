@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { User } from "@/types/main";
 
 const useUser = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<User>();
   const [error, seterror] = useState("");
   const [refetch, setRefetch] = useState(false);
   useEffect(() => {
@@ -13,7 +14,7 @@ const useUser = () => {
       const refreshToken = await AsyncStorage.getItem("refresh_token");
 
       await axios
-        .get(`http://localhost:8000/api/v1/me`, {
+        .get(`https://fitness-app-server-qno7.onrender.com/api/v1/me`, {
           headers: {
             "access-token": accessToken,
             "refresh-token": refreshToken,
