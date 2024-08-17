@@ -24,3 +24,11 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+
+export const loginColors = {
+  white: "#FFFFFF",
+  primary: "#45484A",
+  secondary: "#AEB5BB",
+  gray: "#D9D9D9",
+};
