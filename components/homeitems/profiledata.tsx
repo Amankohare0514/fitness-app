@@ -64,7 +64,6 @@ const ProfileData: React.FC<ProfileDataProps> = ({ user }) => {
               <Ionicons name="close" size={24} color="#333" />
             </TouchableOpacity>
             <ThemedText style={styles.modalText}>This is the modal content</ThemedText>
-            {/* Add your menu content here */}
           </ThemedView>
         </ThemedView>
       </Modal>
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#ccc',
     borderWidth: 0.2,
-    borderRadius: 20,
+    borderRadius: 6,
     backgroundColor: '#f9f9f9',
     paddingHorizontal: 10,
     paddingVertical: 8, 

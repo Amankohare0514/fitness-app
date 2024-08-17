@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        fontWeight: '500',
+        fontWeight: 'bold',
+        color: '#333',
     },
     seeAllContainer: {
         padding: 10,
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
     },
     text: {
         marginTop: 5,
+         color: 'gray'
     },
 });
 
