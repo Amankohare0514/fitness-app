@@ -29,7 +29,7 @@ const Diet: React.FC = () => {
 
   const fetchDiets = async () => {
     try {
-      const response = await axios.get<DietResponse>(`https://api.spoonacular.com/recipes/complexSearch`, {
+      const response = await axios.get<DietResponse>('https://api.spoonacular.com/recipes/complexSearch', {
         params: {
           apiKey: 'bceeb025d5534b488f8b2ed3c00a95a6', 
           query: searchQuery,
