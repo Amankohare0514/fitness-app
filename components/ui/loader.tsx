@@ -1,14 +1,19 @@
-import { LinearGradient } from "expo-linear-gradient";
+
 import { ThemedText } from "../ThemedText";
+import { ThemedView } from "../ThemedView";
+import AnimatedLoader from "react-native-animated-loader";
 
 const Loader = () => {
   return (
-    <LinearGradient
-      colors={["#e5ecf9", "#f6f7f9"]}
-      style={{ flex: 1, justifyContent: "center", alignContent: "center" }}
-    >
-      <ThemedText style={{ textAlign: "center" }}>Loading...</ThemedText>
-    </LinearGradient>
+    <ThemedView>
+      <AnimatedLoader
+        visible={true}
+        overlayColor="white"
+        animationStyle={{ width: 350, height: 350 }}
+        speed={1.5}
+        source={require("@/assets/loading.json")}
+      />
+    </ThemedView>
   );
 };
 

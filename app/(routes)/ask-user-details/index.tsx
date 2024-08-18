@@ -1,6 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import AskUserDetailsScreen from '@/screens/ask.user.details.screen'
+import AskUserDetailsScreen from '@/screens/userDetails/ask.user.details.screen'
 
 const AskUserDetails = () => {
   return (
@@ -9,5 +7,3 @@ const AskUserDetails = () => {
 }
 
 export default AskUserDetails
-
-const styles = StyleSheet.create({})
