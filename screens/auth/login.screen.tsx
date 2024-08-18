@@ -13,9 +13,11 @@ import { useRouter } from "expo-router";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loginColors } from "@/constants/Colors";
+import useUser from "@/hooks/auth/useUser";
 
 const LoginScreen = () => {
   const router = useRouter();
+  const {user} = useUser()
   const [isPasswordVisible, setisPasswordVisible] = useState(false);
   const [buttonSpinner, setButtonSpinner] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -60,11 +62,17 @@ const LoginScreen = () => {
       })
       .then(async (res) => {
         setButtonSpinner(true);
-        console.log(res);
+        console.log(res.data.user.age);
         await AsyncStorage.setItem("access_token", res.data.accessToken);
         await AsyncStorage.setItem("refresh_token", res.data.refreshToken);
         setButtonSpinner(false);
-        router.push("/(tabs)");
+        // wait for 3 second before router.push
+        if(!res.data.user.age){
+          router.push("/(routes)/ask-user-details")
+        }
+        else{
+          router.push("/(tabs)")
+        }       
       })
       .catch((error) => {
         setButtonSpinner(false);

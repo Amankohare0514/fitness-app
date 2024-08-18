@@ -11,4 +11,16 @@ export type User = {
   password?: string;
   createdAt: Date;
   updatedAt: Date;
+  age: number;
+  weightKg: number;
+  weightLb: number;
+  heightCm: number;
+  heightFeet: number;
+  gender: "Male" | "Female";
+  activityLevel:
+    | "Sedentary"
+    | "Lightly active"
+    | "Moderately active"
+    | "Very active"
+    | "Super active";
 };

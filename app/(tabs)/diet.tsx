@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { TextInput, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
-import axios from 'axios';
-import { useRouter } from 'expo-router';
-import { ThemedView } from '@/components/ThemedView';
-import { ThemedText } from '@/components/ThemedText';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from "react";
+import {
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
+} from "react-native";
+import axios from "axios";
+import { useRouter } from "expo-router";
+import { ThemedView } from "@/components/ThemedView";
+import { ThemedText } from "@/components/ThemedText";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Define the type for a single diet item
 interface DietItem {
@@ -24,7 +31,7 @@ interface DietResponse {
 
 const Diet: React.FC = () => {
   const [diets, setDiets] = useState<DietItem[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
@@ -34,29 +41,39 @@ const Diet: React.FC = () => {
 
   const fetchDiets = async () => {
     try {
-      const response = await axios.get<DietResponse>(`https://api.spoonacular.com/recipes/complexSearch`, {
-        params: {
-          apiKey: 'bceeb025d5534b488f8b2ed3c00a95a6',
-          query: searchQuery,
-          addRecipeNutrition: true,
-        },
-      });
+      const response = await axios.get<DietResponse>(
+        `https://api.spoonacular.com/recipes/complexSearch`,
+        {
+          params: {
+            apiKey: "bceeb025d5534b488f8b2ed3c00a95a6",
+            query: searchQuery,
+            addRecipeNutrition: true,
+          },
+        }
+      );
       setDiets(response.data.results);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching diets:', error);
+      console.error("Error fetching diets:", error);
       setLoading(false);
     }
   };
 
   const renderDietCard = ({ item }: { item: DietItem }) => (
-    <TouchableOpacity style={styles.card} onPress={() => router.push(`/diet/${item.id}`)}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => router.push(`/diet/${item.id}`)}
+    >
       <Image source={{ uri: item.image }} style={styles.image} />
       <ThemedView style={styles.textContainer}>
         <ThemedText style={styles.title}>{item.title}</ThemedText>
         <ThemedView style={styles.infoContainer}>
-          <ThemedText style={styles.infoText}>Protein: {item.nutrition.protein}g</ThemedText>
-          <ThemedText style={styles.infoText}>Calories: {item.nutrition.calories}</ThemedText>
+          <ThemedText style={styles.infoText}>
+            Protein: {item.nutrition.protein}g
+          </ThemedText>
+          <ThemedText style={styles.infoText}>
+            Calories: {item.nutrition.calories}
+          </ThemedText>
         </ThemedView>
       </ThemedView>
     </TouchableOpacity>
@@ -69,25 +86,25 @@ const Diet: React.FC = () => {
 
   return (
     <SafeAreaView>
-    <ThemedView style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search diets..."
-        onChangeText={(text) => setSearchQuery(text)}
-        onSubmitEditing={handleSearch}
-        value={searchQuery}
-      />
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <FlatList
-          data={diets}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={2} // Render items in two columns
-          renderItem={renderDietCard}
+      <ThemedView style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder="Search diets..."
+          onChangeText={(text) => setSearchQuery(text)}
+          onSubmitEditing={handleSearch}
+          value={searchQuery}
         />
-      )}
-    </ThemedView>
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <FlatList
+            data={diets}
+            keyExtractor={(item) => item.id.toString()}
+            numColumns={2} // Render items in two columns
+            renderItem={renderDietCard}
+          />
+        )}
+      </ThemedView>
     </SafeAreaView>
   );
 };
@@ -95,12 +112,12 @@ const Diet: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginBottom: 30,
   },
   input: {
     height: 40,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 10,
@@ -108,38 +125,38 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
     margin: 5,
     borderRadius: 10,
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 100,
     borderRadius: 10,
     marginBottom: 10,
   },
   textContainer: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   title: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
     marginBottom: 5,
   },
   infoContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   infoText: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
 });
 

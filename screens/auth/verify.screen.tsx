@@ -38,6 +38,8 @@ const VerifyScreen = () => {
         }
       )
       .then((res) => {
+
+        console.log(res.data)
         // toast.show(res.data.message, {
         //   type: "success",
         // });

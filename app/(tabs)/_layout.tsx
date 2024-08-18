@@ -74,13 +74,6 @@ export default function TabLayout() {
         }}
       />
       
-      <Tabs.Screen
-        name="diet/[id]"
-        options={{
-          href: null,
-          headerShown: true,
-        }}
-      />
     </Tabs>
   );
 }
