@@ -62,7 +62,7 @@ const Diet: React.FC = () => {
   const renderDietCard = ({ item }: { item: DietItem }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => router.push(`/diet/${item.id}`)}
+      onPress={() => router.push(`/diets/${item.id}`)}
     >
       <Image source={{ uri: item.image }} style={styles.image} />
       <ThemedView style={styles.textContainer}>

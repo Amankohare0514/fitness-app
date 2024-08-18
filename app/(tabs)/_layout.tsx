@@ -1,10 +1,10 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import useUser from '@/hooks/auth/useUser';
 import { Image } from 'react-native';
+
 export default function TabLayout() {
   const { user } = useUser()
   const colorScheme = useColorScheme();
@@ -58,9 +58,9 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="diet"
+        name="diets"
         options={{
-          title: 'Diet',
+          title: 'Diets',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'flash' : 'flash-outline'} color={color} />
           ),
