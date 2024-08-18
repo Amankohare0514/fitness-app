@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import Wheely  from "react-native-wheely";
 
 const AskHeight = () => {
@@ -27,7 +27,8 @@ const AskHeight = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Select your height:</Text>
+      <Text style={styles.title}>Select your height</Text>
+      <Text style={styles.subtitle}>This help us create your personalized plan.</Text>
       <Wheely
         selectedIndex={height}
         onChange={handleHeightChange}
@@ -36,10 +37,11 @@ const AskHeight = () => {
       <Text style={styles.selectedHeight}>
         {unit === "cm" ? `${height} cm` : convertHeightToFeet(height)}
       </Text>
-      <Button
-        title={`Switch to ${unit === "cm" ? "Feet" : "Centimeters"}`}
-        onPress={toggleUnit}
-      />
+      <TouchableOpacity style={styles.switchButton} onPress={toggleUnit}>
+        <Text style={styles.switchButtonText}>
+          Switch to {unit === "cm" ? "Feet" : "Centimeters"}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -51,13 +53,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  label: {
-    fontSize: 24,
-    marginBottom: 20,
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: 'gray',
+    marginBottom: 40,
+    textAlign: 'center',
+    fontWeight: '500',
   },
   selectedHeight: {
-    fontSize: 20,
+    fontSize: 26,
     marginVertical: 20,
+    fontWeight: 'bold'
+  },
+  switchButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  switchButtonText: {
+    fontSize: 18,
+    color: '#fff',
+    marginRight: 10,
   },
 });
 

@@ -100,7 +100,7 @@ const Diet: React.FC = () => {
           <FlatList
             data={diets}
             keyExtractor={(item) => item.id.toString()}
-            numColumns={2} // Render items in two columns
+            numColumns={2}
             renderItem={renderDietCard}
           />
         )}
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     backgroundColor: "#fff",
-    marginBottom: 30,
   },
   input: {
     height: 40,

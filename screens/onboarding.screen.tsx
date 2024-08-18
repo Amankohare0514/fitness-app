@@ -1,7 +1,6 @@
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import { loginColors } from "@/constants/Colors";
 
 const OnBoardingScreen = () => {

@@ -1,6 +1,5 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
 
-
 interface UserContextType {
   age: number;
   weightKg: number;

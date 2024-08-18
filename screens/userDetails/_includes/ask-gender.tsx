@@ -1,79 +1,120 @@
-import { useUserContext } from "@/store/store";
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useUserContext } from '@/store/store';
 
 const AskGender = () => {
-  
-  const {gender, setGender} = useUserContext()
+  const { gender, setGender } = useUserContext();
 
-  const handleGenderSelection = (gender: "Male" | "Female") => {
-    setGender(gender);
+  const handleGenderSelection = (selectedGender: "Male" | "Female") => {
+    setGender(selectedGender);
   };
-
-  console.log(gender)
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          gender === "Male" && styles.selectedButton,
-        ]}
-        onPress={() => handleGenderSelection("Male")}
-      >
-        <Text
+      <Text style={styles.title}>Select Your Gender</Text>
+      <Text style={styles.subtitle}>This help us create your personalized plan.</Text>
+      <View style={styles.optionsContainer}>
+        <TouchableOpacity
           style={[
-            styles.buttonText,
-            gender === "Male" && styles.selectedButtonText,
+            styles.optionButton,
+            gender === "Male" && styles.selectedOption,
           ]}
+          onPress={() => handleGenderSelection("Male")}
         >
-          Male
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          gender === "Female" && styles.selectedButton,
-        ]}
-        onPress={() => handleGenderSelection("Female")}
-      >
-        <Text
+          <Ionicons 
+            name="male" 
+            size={24} 
+            color={gender === "Male" ? "#fff" : "#4a4a4a"} 
+            style={styles.icon}
+          />
+          <Text
+            style={[
+              styles.optionText,
+              gender === "Male" && styles.selectedOptionText,
+            ]}
+          >
+            Male
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           style={[
-            styles.buttonText,
-            gender === "Female" && styles.selectedButtonText,
+            styles.optionButton,
+            gender === "Female" && styles.selectedOption,
           ]}
+          onPress={() => handleGenderSelection("Female")}
         >
-          Female
-        </Text>
-      </TouchableOpacity>
+          <Ionicons 
+            name="female" 
+            size={24} 
+            color={gender === "Female" ? "#fff" : "#4a4a4a"} 
+            style={styles.icon}
+          />
+          <Text
+            style={[
+              styles.optionText,
+              gender === "Female" && styles.selectedOptionText,
+            ]}
+          >
+            Female
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex:1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f9f9f9',
   },
-  button: {
-    backgroundColor: "#f0f0f0",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: 'gray',
+    marginBottom: 40,
+    textAlign: 'center',
+    fontWeight: '500',
+  },
+  optionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
+  optionButton: {
+    backgroundColor: '#fff',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     borderRadius: 25,
-    marginHorizontal: 10,
-    borderWidth: 2,
-    borderColor: "#d0d0d0",
+    borderWidth: 0.7,
+    borderColor: '#d0d0d0',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  selectedButton: {
-    backgroundColor: "#4a90e2",
-    borderColor: "#2a70c2",
+  selectedOption: {
+    backgroundColor: 'blue',
+    borderColor: '#2a70c2',
   },
-  buttonText: {
+  optionText: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
+    marginLeft: 10,
   },
-  selectedButtonText: {
-    color: "#fff",
+  selectedOptionText: {
+    color: '#fff',
+  },
+  icon: {
+    marginRight: 10,
   },
 });
 
