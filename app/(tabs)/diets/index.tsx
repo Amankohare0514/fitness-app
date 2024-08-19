@@ -13,7 +13,6 @@ import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// Define the type for a single diet item
 interface DietItem {
   id: number;
   title: string;
@@ -24,7 +23,6 @@ interface DietItem {
   };
 }
 
-// Define the type for the response from the API
 interface DietResponse {
   results: DietItem[];
 }
@@ -42,12 +40,13 @@ const Diet: React.FC = () => {
   const fetchDiets = async () => {
     try {
       const response = await axios.get<DietResponse>(
-        `https://api.spoonacular.com/recipes/complexSearch`,
+        `https://api.spoonacular.com/recipes/complexSearch`, 
         {
           params: {
             apiKey: "bceeb025d5534b488f8b2ed3c00a95a6",
             query: searchQuery,
             addRecipeNutrition: true,
+            number: 20,
           },
         }
       );
@@ -58,6 +57,7 @@ const Diet: React.FC = () => {
       setLoading(false);
     }
   };
+  
 
   const renderDietCard = ({ item }: { item: DietItem }) => (
     <TouchableOpacity
@@ -67,14 +67,6 @@ const Diet: React.FC = () => {
       <Image source={{ uri: item.image }} style={styles.image} />
       <ThemedView style={styles.textContainer}>
         <ThemedText style={styles.title}>{item.title}</ThemedText>
-        <ThemedView style={styles.infoContainer}>
-          <ThemedText style={styles.infoText}>
-            Protein: {item.nutrition.protein}g
-          </ThemedText>
-          <ThemedText style={styles.infoText}>
-            Calories: {item.nutrition.calories}
-          </ThemedText>
-        </ThemedView>
       </ThemedView>
     </TouchableOpacity>
   );
