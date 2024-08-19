@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
   },
   slider: {
     width: '100%',
-    height: 40,
-    marginVertical: 20,
+    height: 70,
+    marginVertical: 30,
+    backgroundColor: 'transparent',
   },
   ageText: {
     fontSize: 24,

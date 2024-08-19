@@ -1,15 +1,14 @@
+import { useUserContext } from "@/store/store";
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Wheely from "react-native-wheely";
 
 const AskWeight = () => {
-  const [weight, setWeight] = useState(70); // Default weight in kg
+  const {weightKg, setWeightKg} = useUserContext()
 
-  // Generate the options array for kilograms
-  const options = Array.from({ length: 300 }, (_, i) => i + 30); // Range from 30 kg to 329 kg
-
+  const options = Array.from({ length: 300 }, (_, i) => i + 30); 
   const handleWeightChange = (index: number) => {
-    setWeight(options[index]); // Update the weight based on selected index
+    setWeightKg(options[index]); 
   };
 
   return (
@@ -17,11 +16,11 @@ const AskWeight = () => {
       <Text style={styles.title}>Select your weight</Text>
       <Text style={styles.subtitle}>This help us create your personalized plan.</Text>
       <Wheely
-        selectedIndex={options.indexOf(weight)}
+        selectedIndex={options.indexOf(weightKg)}
         onChange={handleWeightChange}
         options={options}
       />
-      <Text style={styles.selectedWeight}>{`${weight} kg`}</Text>
+      <Text style={styles.selectedWeight}>{`${weightKg} kg`}</Text>
     </View>
   );
 };

@@ -31,10 +31,10 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [age, setAge] = useState(0);
-  const [weightKg, setWeightKg] = useState(0);
+  const [weightKg, setWeightKg] = useState(70);
   const [weightLb, setWeightLb] = useState(0);
   const [heightCm, setHeightCm] = useState(0);
-  const [heightFeet, setHeightFeet] = useState(0);
+  const [heightFeet, setHeightFeet] = useState(170);
   const [gender, setGender] = useState<"Male" | "Female">("Male");
   const [activityLevel, setActivityLevel] = useState<"Sedentary" | "Lightly active" | "Moderately active" | "Very active" | "Super active">("Lightly active");
 
