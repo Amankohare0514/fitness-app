@@ -11,27 +11,27 @@ export interface Workout {
 export const workouts: Workout[] = [
   {
     imageSource: require('@/assets/workouts/lower.png'),
-    title: 'Lower Body Workout',
+    title: 'Lower Body Workout for Strength and Endurance',
     rating: 4.5,
   },
   {
     imageSource: require('@/assets/workouts/upper.png'),
-    title: 'Upper Body Workout',
+    title: 'Upper Body Training: Build Muscle and Definition',
     rating: 4,
   },
   {
     imageSource: require('@/assets/workouts/arm.png'),
-    title: 'Arm Workout',
+    title: 'Quick Arm Toning Routine: Sculpt Your Arms Fast',
     rating: 3.5,
   },
   {
     imageSource: require('@/assets/workouts/leg.png'),
-    title: 'Leg Workout',
+    title: 'Powerful Leg Workout for Explosive Strength',
     rating: 4.8,
   },
   {
     imageSource: require('@/assets/workouts/yoga.jpg'),
-    title: 'Yoga',
+    title: 'Revitalizing Yoga: Relax and Renew Your Body',
     rating: 3.8,
   },
 ];

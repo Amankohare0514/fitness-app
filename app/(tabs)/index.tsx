@@ -1,4 +1,4 @@
-import { ScrollView} from 'react-native'
+import { ScrollView } from 'react-native'
 import React from 'react'
 import Workouts from '@/components/homeitems/workouts'
 import ProfileData from '@/components/homeitems/profiledata'
@@ -14,7 +14,7 @@ const HomeScreen = () => {
         <ProfileData />
         <Categories />
         <Workouts />
-        <SubCategory/>
+        <SubCategory />
       </ScrollView>
     </SafeAreaView>
   )

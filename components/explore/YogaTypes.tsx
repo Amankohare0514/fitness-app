@@ -1,48 +1,29 @@
 import React from 'react';
 import { Image, StyleSheet, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { workouts } from "@/components/homeitems/workoutData";
-import { Ionicons } from '@expo/vector-icons';
+import { YogaData } from './YodaData';
 import { ThemedView } from '../ThemedView';
 import { ThemedText } from '../ThemedText';
 const { width } = Dimensions.get('window');
 
-const renderStars = (rating: number) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-        stars.push(
-            <Ionicons
-                key={i}
-                name={i <= rating ? 'star' : 'star-outline'}
-                size={16}
-                color="#FFD700"
-                style={styles.star}
-            />
-        );
-    }
-    return stars;
-};
-
-const ExploreWorkout = () => {
+const YogaTypes = () => {
     return (
         <ThemedView style={styles.container}>
-            <ThemedText style={styles.title}>Workout's</ThemedText>
+            <ThemedText style={styles.title}>Explore Types of Yoga</ThemedText>
             <Swiper
                 showsButtons={false}
                 loop={false}
-                style={styles.swiper}
                 autoplay={true}
+                style={styles.swiper}
                 dot={<ThemedView />}
                 activeDot={<ThemedView />}
             >
-                {workouts.map((workout, index) => (
+                {YogaData.map((yoga, index) => (
                     <ThemedView key={index} style={styles.cardContainer}>
                         <ThemedView style={styles.card}>
-                            <Image source={workout.imageSource} style={styles.image} />
-                            <ThemedText style={styles.title1}>{workout.title}</ThemedText>
-                            <ThemedView style={styles.ratingContainer}>
-                               <ThemedText>rating  {renderStars(workout.rating)}</ThemedText>
-                            </ThemedView>
+                            <Image source={yoga.imageSource} style={styles.image} />
+                            <ThemedText style={styles.title1}>{yoga.title}</ThemedText>
+                            <ThemedText style={styles.subtitle}>{yoga.description}</ThemedText>
                         </ThemedView>
                     </ThemedView>
                 ))}
@@ -56,7 +37,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     swiper: {
-        height: 320,
+        height: 360,
     },
     title: {
         fontSize: 18,
@@ -68,12 +49,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         color: '#333',
+        marginBottom: 6,
+    },
+    subtitle: {
+        fontSize: 10,
+        fontWeight: '500',
+        marginHorizontal: 8,
+        color: '#333',
         marginBottom: 16,
     },
     cardContainer: {
         flex: 1,
     },
     card: {
+        backgroundColor: 'white',
         borderRadius: 10,
         borderWidth: 0.2,
         borderColor: 'gray',
@@ -89,14 +78,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         marginBottom: 10,
     },
-    ratingContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginBottom: 10,
-    },
-    star: {
-        marginHorizontal: 2,
-    },
 });
 
-export default ExploreWorkout;
+export default YogaTypes;

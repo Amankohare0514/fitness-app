@@ -46,7 +46,7 @@ const Diet: React.FC = () => {
             apiKey: "bceeb025d5534b488f8b2ed3c00a95a6",
             query: searchQuery,
             addRecipeNutrition: true,
-            number: 20,
+            number: 60,
           },
         }
       );
@@ -77,8 +77,8 @@ const Diet: React.FC = () => {
   };
 
   return (
-    <SafeAreaView>
-      <ThemedView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ThemedView>
         <TextInput
           style={styles.input}
           placeholder="Search diets..."
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderColor: "#ccc",
-    borderWidth: 1,
+    borderWidth: 0.4,
     paddingHorizontal: 10,
     marginBottom: 10,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   card: {
     flex: 1,

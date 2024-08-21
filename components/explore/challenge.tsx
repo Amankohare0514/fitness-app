@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import {StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { ThemedView } from '../ThemedView';
+import { ThemedText } from '../ThemedText';
 
 const challenges = [
     { id: '1', name: 'Plank Challenge', icon: 'fitness-center', color: '#FAE179' },
@@ -13,17 +15,17 @@ const challenges = [
 
 const Challenge: React.FC = () => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Challenges</Text>
-            <View style={styles.categoryContainer}>
+        <ThemedView style={styles.container}>
+            <ThemedText style={styles.title}>Challenges</ThemedText>
+            <ThemedView style={styles.categoryContainer}>
                 {challenges.map((challenge) => (
-                    <View key={challenge.id} style={[styles.category, { backgroundColor: challenge.color }]}>
+                    <ThemedView key={challenge.id} style={[styles.category, { backgroundColor: challenge.color }]}>
                         <MaterialIcons name={challenge.icon} size={60} color="rgba(255, 255, 255, 0.7)" style={styles.iconBackground} />
-                        <Text style={styles.text}>{challenge.name}</Text>
-                    </View>
+                        <ThemedText style={styles.text}>{challenge.name}</ThemedText>
+                    </ThemedView>
                 ))}
-            </View>
-        </View>
+            </ThemedView>
+        </ThemedView>
     );
 };
 
