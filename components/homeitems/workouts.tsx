@@ -1,38 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, Image, ImageProps } from "react-native";
 import React from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, ImageProps } from "react-native";
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
 import { Ionicons } from "@expo/vector-icons";
+import { workouts } from "./workoutData"; // Import the workout data
 
-const workouts = [
-  {
-    imageSource: require('@/assets/workouts/lower.png'),
-    title: 'Lower Body Workout',
-    rating: 4.5, 
-  },
-  {
-    imageSource: require('@/assets/workouts/upper.png'),
-    title: 'Upper Body Workout',
-    rating: 4,
-  },
-  {
-    imageSource: require('@/assets/workouts/arm.png'),
-    title: 'Arm Workout',
-    rating: 3.5,
-  },
-  {
-    imageSource: require('@/assets/workouts/leg.png'),
-    title: 'Leg Workout',
-    rating: 4.8,
-  },
-  {
-    imageSource: require('@/assets/workouts/yoga.png'),
-    title: 'Yoga',
-    rating: 5,
-  },
-];
-
-const Card = ({ imageSource, title, rating }: { imageSource: ImageProps, title: string,  rating: number }) => (
+const Card = ({ imageSource, title, rating }: { imageSource: ImageProps, title: string, rating: number }) => (
   <ThemedView style={styles.card}>
     <View style={styles.imageContainer}>
       <Image source={imageSource} style={styles.cardImage} resizeMode="cover" />
