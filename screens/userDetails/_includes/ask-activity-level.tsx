@@ -7,7 +7,8 @@ import useUser from "@/hooks/auth/useUser";
 
 const AskActivityLevel = () => {
   const router = useRouter();
-
+  const { user } = useUser();
+  console.log(user?._id);
   const { activityLevel, setActivityLevel, age, weightKg, heightCm, gender } =
     useUserContext();
   console.log({ activityLevel, age, weightKg, heightCm, gender });
@@ -21,25 +22,31 @@ const AskActivityLevel = () => {
   ] as const;
 
   const handleSubmitChangeToApi = async () => {
-     await axios
-       .put(
-         "https://fitness-app-server-qno7.onrender.com/api/v1/update-user-details",
-         {
-           age: age,
-           gender: gender,
-           weightKg: weightKg,
-           heightCm: heightCm,
-           activityLevel: activityLevel,
-         }
-       )
-       .then((res) => {
-         console.log(res.data);
-         router.push("/(tabs)");
-       })
-       .catch((err) => {
-         console.log(err.message);
-         Alert.alert("Error", "Something went wrong. Please try again.");
-       });
+    try {
+      const response = await fetch(
+        "https://fitness-app-server-qno7.onrender.com/api/v1/update-user-details",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: user?._id,
+            age: age,
+            gender: gender,
+            weightKg: weightKg,
+            heightCm: heightCm,
+            activityLevel: activityLevel,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+       router.push("/(tabs)");
+    } catch (error) {
+      console.log(error);
+       Alert.alert("Error", "Something went wrong. Please try again.");
+    }
   };
 
   return (
