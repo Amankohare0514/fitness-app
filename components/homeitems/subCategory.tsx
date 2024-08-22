@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, ImageBackground, Dimensions, TouchableOpacity }
 import React from 'react';
 import { ThemedView } from '../ThemedView';
 import { ThemedText } from '../ThemedText';
-
 const screenWidth = Dimensions.get('window').width;
 
 const subCategories = [
