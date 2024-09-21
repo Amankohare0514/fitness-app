@@ -16,9 +16,6 @@ const Categories: React.FC = () => {
         <ThemedView style={styles.container}>
             <ThemedView style={styles.headerContainer}>
                 <ThemedText style={styles.title}>Categories</ThemedText>
-                <TouchableOpacity style={styles.seeAllContainer}>
-                    <ThemedText style={styles.seeAllText}>See All</ThemedText>
-                </TouchableOpacity>
             </ThemedView>
             <ThemedView style={styles.categoryContainer}>
                 {categories.map((category) => (
